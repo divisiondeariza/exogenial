@@ -166,13 +166,12 @@ button {
 .summary-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: minmax(320px, 1.6fr) repeat(3, minmax(180px, 1fr));
+  grid-template-columns: minmax(320px, 1.6fr) repeat(2, minmax(180px, 1fr));
   margin-bottom: 18px;
 }
 
 .identity-panel,
 .metric-card,
-.insights-grid article,
 .table-section {
   background: #ffffff;
   border: 1px solid #dce3dc;
@@ -271,46 +270,13 @@ dd {
   overflow-wrap: anywhere;
 }
 
-.insights-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-bottom: 18px;
-}
-
-.insights-grid article {
-  padding: 20px;
-}
-
-.rank-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.rank-row {
-  align-items: center;
-  border-top: 1px solid #edf0ed;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr auto;
-  padding-top: 10px;
-}
-
-.rank-row span,
 td strong {
   display: grid;
   gap: 3px;
 }
 
-.rank-row small,
 td small {
   color: #68786f;
-}
-
-.rank-row b {
-  color: #1f7a5d;
-  overflow-wrap: anywhere;
 }
 
 .table-section {
@@ -504,7 +470,6 @@ td {
   .summary-grid,
   .identity-panel dl,
   .thresholds,
-  .insights-grid,
   .controls {
     grid-template-columns: 1fr;
   }

@@ -3,7 +3,6 @@ import {
   AlertTriangle,
   ArrowDownAZ,
   ArrowDownWideNarrow,
-  BadgeDollarSign,
   Building2,
   Download,
   FileSpreadsheet,
@@ -16,8 +15,8 @@ import {
   X,
 } from "lucide-react";
 import { parseExogenaWorkbook } from "./lib/exogenaParser";
-import { compactCurrency, formatCurrency, formatNumber } from "./lib/format";
-import { groupByReporter, groupByTope, sumRecords, uniqueReporterCount } from "./lib/summarize";
+import { formatCurrency, formatNumber } from "./lib/format";
+import { sumRecords, uniqueReporterCount } from "./lib/summarize";
 import type { ExogenaRecord, ExogenaReport, SortKey } from "./types";
 
 const toCsvValue = (value: string | number) => {
@@ -92,10 +91,7 @@ export function App() {
     });
   }, [query, report, sortKey, tope]);
 
-  const reporterGroups = useMemo(() => groupByReporter(report?.records ?? []), [report]);
-  const topeGroups = useMemo(() => groupByTope(report?.records ?? []), [report]);
   const filteredTotal = useMemo(() => sumRecords(filteredRecords), [filteredRecords]);
-  const grandTotal = useMemo(() => sumRecords(report?.records ?? []), [report]);
 
   const exportCsv = () => {
     const headers = [
@@ -201,11 +197,6 @@ export function App() {
             </article>
 
             <article className="metric-card">
-              <BadgeDollarSign size={22} />
-              <span>Total reportado</span>
-              <strong>{formatCurrency(grandTotal)}</strong>
-            </article>
-            <article className="metric-card">
               <Building2 size={22} />
               <span>Informantes</span>
               <strong>{formatNumber(uniqueReporterCount(report.records))}</strong>
@@ -231,37 +222,6 @@ export function App() {
                 <strong>{formatCurrency(threshold.value)}</strong>
               </article>
             ))}
-          </section>
-
-          <section className="insights-grid">
-            <article>
-              <div className="section-heading">Mayores informantes</div>
-              <div className="rank-list">
-                {reporterGroups.slice(0, 5).map((group) => (
-                  <div className="rank-row" key={group.nit || group.name}>
-                    <span>
-                      <strong>{group.name}</strong>
-                      <small>{group.nit}</small>
-                    </span>
-                    <b>{compactCurrency(group.value)}</b>
-                  </div>
-                ))}
-              </div>
-            </article>
-            <article>
-              <div className="section-heading">Distribucion por tope</div>
-              <div className="rank-list">
-                {topeGroups.map((group) => (
-                  <div className="rank-row" key={group.label}>
-                    <span>
-                      <strong>{group.label}</strong>
-                      <small>{group.count} registros</small>
-                    </span>
-                    <b>{compactCurrency(group.value)}</b>
-                  </div>
-                ))}
-              </div>
-            </article>
           </section>
 
           <section className="table-section">
