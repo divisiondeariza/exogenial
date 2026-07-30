@@ -41,6 +41,21 @@ button {
   margin-bottom: 24px;
 }
 
+.brand-title {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-logo {
+  border-radius: 8px;
+  flex: 0 0 auto;
+  height: clamp(76px, 10vw, 128px);
+  object-fit: contain;
+  width: clamp(76px, 10vw, 128px);
+}
+
 .topbar h1,
 .upload-copy h2,
 .identity-panel h2,
@@ -498,6 +513,10 @@ td {
   .table-header {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .brand-title {
+    align-items: flex-start;
   }
 
   .upload-panel {

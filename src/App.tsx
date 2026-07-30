@@ -32,6 +32,8 @@ const normalize = (value: string) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
+const topeCode = (value: string) => value.match(/Tope\s+\d+/i)?.[0].replace(/\s+/g, " ") ?? value;
+
 export function App() {
   const [report, setReport] = useState<ExogenaReport | null>(null);
   const [query, setQuery] = useState("");
@@ -68,6 +70,14 @@ export function App() {
     report?.records.forEach((record) => record.topes.forEach((label) => labels.add(label)));
     return ["Todos", ...labels];
   }, [report]);
+  const topeLabelByCode = useMemo(() => {
+    const labels = new Map<string, string>();
+    report?.thresholds.forEach((threshold) => {
+      labels.set(topeCode(threshold.label), threshold.label);
+    });
+    return labels;
+  }, [report]);
+  const formatTopeLabel = (label: string) => (label === "Todos" ? label : topeLabelByCode.get(topeCode(label)) ?? label);
   const selectedThresholdExplanation = selectedThreshold ? getThresholdExplanation(selectedThreshold) : undefined;
 
   const filteredRecords = useMemo(() => {
@@ -132,9 +142,12 @@ export function App() {
   return (
     <main className="app-shell">
       <section className="topbar">
-        <div>
-          <span className="eyebrow">Exogenial</span>
-          <h1>Informacion exogena clara y revisable</h1>
+        <div className="brand-title">
+          <img alt="" className="brand-logo" src="/logo.png" />
+          <div>
+            <span className="eyebrow">Exogenial</span>
+            <h1>Informacion exogena clara y revisable</h1>
+          </div>
         </div>
         {report && (
           <button className="ghost-button" onClick={() => setReport(null)} type="button">
@@ -270,7 +283,9 @@ export function App() {
                 <Filter size={18} />
                 <select onChange={(event) => setTope(event.target.value)} value={tope}>
                   {allTopes.map((label) => (
-                    <option key={label}>{label}</option>
+                    <option key={label} value={label}>
+                      {formatTopeLabel(label)}
+                    </option>
                   ))}
                 </select>
               </label>
@@ -306,7 +321,7 @@ export function App() {
                       <td>
                         <div className="badges">
                           {(record.topes.length ? record.topes : ["Sin tope"]).map((label) => (
-                            <span key={label}>{label}</span>
+                            <span key={label}>{formatTopeLabel(label)}</span>
                           ))}
                         </div>
                       </td>
