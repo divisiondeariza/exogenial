@@ -7,6 +7,7 @@ import {
   Download,
   FileSpreadsheet,
   Filter,
+  Info,
   Search,
   ShieldCheck,
   Trash2,
@@ -14,10 +15,11 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { getThresholdExplanation } from "./content/thresholdExplanations";
 import { parseExogenaWorkbook } from "./lib/exogenaParser";
 import { formatCurrency, formatNumber } from "./lib/format";
 import { sumRecords, uniqueReporterCount } from "./lib/summarize";
-import type { ExogenaRecord, ExogenaReport, SortKey } from "./types";
+import type { ExogenaRecord, ExogenaReport, SortKey, Threshold } from "./types";
 
 const toCsvValue = (value: string | number) => {
   const raw = String(value ?? "");
@@ -36,6 +38,7 @@ export function App() {
   const [tope, setTope] = useState("Todos");
   const [sortKey, setSortKey] = useState<SortKey>("value");
   const [selectedRecord, setSelectedRecord] = useState<ExogenaRecord | null>(null);
+  const [selectedThreshold, setSelectedThreshold] = useState<Threshold | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,6 +49,7 @@ export function App() {
       const parsed = await parseExogenaWorkbook(file);
       setReport(parsed);
       setSelectedRecord(null);
+      setSelectedThreshold(null);
     } catch (parseError) {
       setError(parseError instanceof Error ? parseError.message : "No fue posible leer el archivo.");
     } finally {
@@ -64,6 +68,7 @@ export function App() {
     report?.records.forEach((record) => record.topes.forEach((label) => labels.add(label)));
     return ["Todos", ...labels];
   }, [report]);
+  const selectedThresholdExplanation = selectedThreshold ? getThresholdExplanation(selectedThreshold) : undefined;
 
   const filteredRecords = useMemo(() => {
     if (!report) return [];
@@ -216,12 +221,27 @@ export function App() {
           )}
 
           <section className="thresholds">
-            {report.thresholds.map((threshold) => (
-              <article className="threshold-card" key={threshold.id}>
-                <span>{threshold.label}</span>
-                <strong>{formatCurrency(threshold.value)}</strong>
-              </article>
-            ))}
+            {report.thresholds.map((threshold) => {
+              const explanation = getThresholdExplanation(threshold);
+              return (
+                <article className="threshold-card" key={threshold.id}>
+                  <div>
+                    <span>{threshold.label}</span>
+                    {explanation && (
+                      <button
+                        aria-label={`Explicacion de ${threshold.label}`}
+                        className="threshold-info"
+                        onClick={() => setSelectedThreshold(threshold)}
+                        type="button"
+                      >
+                        <Info size={16} />
+                      </button>
+                    )}
+                  </div>
+                  <strong>{formatCurrency(threshold.value)}</strong>
+                </article>
+              );
+            })}
           </section>
 
           <section className="table-section">
@@ -339,6 +359,50 @@ export function App() {
               <div>
                 <dt>Informacion adicional</dt>
                 <dd>{selectedRecord.additionalInfo || "Sin informacion adicional"}</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      )}
+
+      {selectedThreshold && (
+        <aside className="drawer">
+          <div className="drawer-card">
+            <button className="close-button" onClick={() => setSelectedThreshold(null)} type="button">
+              <X size={20} />
+            </button>
+            <span className="eyebrow">Tope</span>
+            <h2>{selectedThresholdExplanation?.title ?? selectedThreshold.label}</h2>
+            <dl>
+              <div>
+                <dt>Valor en este reporte</dt>
+                <dd>{formatCurrency(selectedThreshold.value)}</dd>
+              </div>
+              <div>
+                <dt>Que significa</dt>
+                <dd>{selectedThresholdExplanation?.meaning}</dd>
+              </div>
+              <div>
+                <dt>Efecto en la declaracion</dt>
+                <dd>{selectedThresholdExplanation?.declarationEffect}</dd>
+              </div>
+              <div>
+                <dt>Efecto en el impuesto</dt>
+                <dd>{selectedThresholdExplanation?.taxEffect}</dd>
+              </div>
+              <div>
+                <dt>Fuentes</dt>
+                <dd>
+                  <ul className="source-list">
+                    {selectedThresholdExplanation?.sources.map((source) => (
+                      <li key={source.url}>
+                        <a href={source.url} rel="noreferrer" target="_blank">
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
               </div>
             </dl>
           </div>

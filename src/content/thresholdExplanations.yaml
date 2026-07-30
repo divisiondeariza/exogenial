@@ -1,0 +1,93 @@
+"1":
+  title: Tope 1 - Ingresos
+  meaning: >
+    Mide si los ingresos brutos del año gravable alcanzan el umbral de referencia.
+    Para el año gravable 2025, la DIAN indica 1.400 UVT, equivalentes a $69.719.000.
+  declarationEffect: >
+    Si este tope se cumple por ingresos brutos, puede existir obligación de presentar
+    Declaración de Renta, incluso antes de revisar deducciones, costos o retenciones.
+  taxEffect: >
+    No significa automáticamente que haya impuesto a pagar. El impuesto se determina
+    después de clasificar ingresos, restar costos, deducciones, rentas exentas,
+    anticipos y retenciones permitidas.
+  sources:
+    - label: DIAN renta personas naturales 2025
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/todo-lo-que-usted-debe-saber-sobre-renta/
+    - label: Decreto 2229 de 2023, art. 1.6.1.13.2.7
+      url: https://normograma.dian.gov.co/dian/compilacion/docs/decreto_2229_2023.htm
+
+"2":
+  title: Tope 2 - Patrimonio
+  meaning: >
+    Revisa el patrimonio bruto al 31 de diciembre: bienes y derechos antes de restar
+    deudas. Para el año gravable 2025, la DIAN publica el umbral de 4.500 UVT,
+    $224.096.000.
+  declarationEffect: >
+    Superar este patrimonio bruto puede obligar a declarar renta aunque los ingresos
+    del año no superen el tope de ingresos.
+  taxEffect: >
+    Este tope activa una obligación formal de declarar; no es, por sí solo, la base
+    del impuesto de renta. El impuesto depende de la renta líquida y otros componentes
+    del formulario.
+  sources:
+    - label: DIAN renta personas naturales 2025
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/todo-lo-que-usted-debe-saber-sobre-renta/
+    - label: Decreto 2229 de 2023, art. 1.6.1.13.2.7
+      url: https://normograma.dian.gov.co/dian/compilacion/docs/decreto_2229_2023.htm
+
+"3":
+  title: Tope 3 - Consumo TC
+  meaning: >
+    Agrupa consumos realizados con tarjeta de crédito durante el año gravable.
+    Para 2025, la DIAN señala el umbral de 1.400 UVT, $69.719.000.
+  declarationEffect: >
+    Si los consumos con tarjeta superan el límite, puede nacer la obligación de
+    declarar aunque los ingresos reportados parezcan menores.
+  taxEffect: >
+    Los consumos no son impuesto en sí mismos. Funcionan como señal de capacidad
+    económica y de cruce de información; el impuesto se calcula con las reglas de
+    renta aplicables.
+  sources:
+    - label: DIAN renta personas naturales 2025
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/todo-lo-que-usted-debe-saber-sobre-renta/
+    - label: Decreto 2229 de 2023, art. 1.6.1.13.2.7
+      url: https://normograma.dian.gov.co/dian/compilacion/docs/decreto_2229_2023.htm
+
+"4":
+  title: Tope 4 - Movimiento
+  meaning: >
+    Corresponde al valor acumulado de consignaciones bancarias, depósitos o inversiones
+    financieras del año. Para 2025, el umbral informado por la DIAN es 1.400 UVT,
+    $69.719.000.
+  declarationEffect: >
+    Superar este movimiento financiero puede obligar a declarar. Conviene revisar si
+    los abonos incluyen traslados propios, dinero de terceros u operaciones que
+    necesiten soporte.
+  taxEffect: >
+    El movimiento bancario no es automáticamente ingreso gravado ni impuesto. Puede
+    requerir explicación y conciliación dentro de la realidad económica del contribuyente.
+  sources:
+    - label: DIAN renta personas naturales 2025
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/todo-lo-que-usted-debe-saber-sobre-renta/
+    - label: Decreto 2229 de 2023, art. 1.6.1.13.2.7
+      url: https://normograma.dian.gov.co/dian/compilacion/docs/decreto_2229_2023.htm
+
+"5":
+  title: Tope 5 - Compras
+  meaning: >
+    Suma compras y consumos del año, no solo tarjeta de crédito. Para 2025, la DIAN lista
+    el límite de 1.400 UVT, $69.719.000.
+  declarationEffect: >
+    Si compras y consumos superan el umbral, puede existir obligación de declarar.
+    La DIAN cruza esta información con reportes de terceros y factura electrónica.
+  taxEffect: >
+    Las compras no generan por sí solas impuesto de renta. Sirven como indicador de
+    obligación y consistencia patrimonial; el saldo a pagar depende del formulario
+    completo.
+  sources:
+    - label: DIAN renta personas naturales 2025
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/todo-lo-que-usted-debe-saber-sobre-renta/
+    - label: DIAN topes de cumplimiento y declaración sugerida
+      url: https://micrositios.dian.gov.co/renta-personas-naturales-ag-2025/preparese-para-la-declaracion/
+    - label: Decreto 2229 de 2023, art. 1.6.1.13.2.7
+      url: https://normograma.dian.gov.co/dian/compilacion/docs/decreto_2229_2023.htm
