@@ -33,6 +33,7 @@ const normalize = (value: string) =>
     .replace(/[\u0300-\u036f]/g, "");
 
 const topeCode = (value: string) => value.match(/Tope\s+\d+/i)?.[0].replace(/\s+/g, " ") ?? value;
+const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
 
 export function App() {
   const [report, setReport] = useState<ExogenaReport | null>(null);
@@ -143,9 +144,9 @@ export function App() {
     <main className="app-shell">
       <section className="topbar">
         <div className="brand-title">
-          <img alt="" className="brand-logo" src="/logo.png" />
+          <img alt="" className="brand-logo" src={logoUrl} />
           <div>
-            <span className="eyebrow">Exogenial</span>
+            <span className="eyebrow">Exo-Genial👍</span>
             <h1>Informacion exogena clara y revisable</h1>
           </div>
         </div>
